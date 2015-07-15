@@ -7,7 +7,11 @@ var LibraryEntryView = Backbone.View.extend({
 
   events: {
     'click': function() {
-      this.model.play();
+      // instead of just playing the song, we should add the current song to the SongQueue collection
+      // The SongQueueView will listen on change events (add) on the SongQueue model and play the first song (if nothing playing / queue is empty)
+      console.log('event: clicked on',this, 'LibraryEntryView');
+      // this.model.play();
+      this.model.enqueue();
     }
   },
 
