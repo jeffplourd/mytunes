@@ -6,6 +6,13 @@ var PlayerView = Backbone.View.extend({
   el: '<audio controls autoplay />',
 
   initialize: function() {
+    console.log(this.model);
+    // why is this not working?
+    // this.model.on('change', function(){
+    //   console.log('player test');
+    //   // this.setSong(model.get('currentSong'));
+    // });
+
   },
 
   setSong: function(song){
