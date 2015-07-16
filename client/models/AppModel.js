@@ -46,9 +46,14 @@ var AppModel = Backbone.Model.extend({
 
       var songQueue = this.get('songQueue');
       var newSong = songQueue.shift();
+      this.unset('currentSong');
       this.set('currentSong', newSong);
 
     }, this);
+
+    this.get('currentSong').on('change', function() {
+      console.log('this changed the song');
+    })
 
   }
 
