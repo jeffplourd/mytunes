@@ -15,6 +15,7 @@ var AppModel = Backbone.Model.extend({
       console.log('setting variable songQueue to: ',song,' in models/AppModel.js, on library.enqueue event')
       // adding 'song' to songQueue collection
 
+      console.log(song);
       var songQueue = this.get('songQueue');
       songQueue.add(song);
 
@@ -22,7 +23,7 @@ var AppModel = Backbone.Model.extend({
         this.set('currentSong', song);
       }; 
 
-    }, this),
+    }, this);
 
     params.library.on('dequeue', function(song){
       var songQueue = this.get('songQueue');
@@ -32,12 +33,29 @@ var AppModel = Backbone.Model.extend({
       var songQueue = this.get('songQueue');
       console.log(songQueue);
     
-    }, this),
+    }, this);
 
     params.library.on('play', function(song){
       console.log('setting: ',song, ' to currentSong, models/AppModel.js')
       this.set('currentSong', song);
     }, this);
+
+    //listen for the 'ended' event
+    params.library.on('ended', function() {
+      console.log('this thing ended');
+
+      var songQueue = this.get('songQueue');
+      var newSong = songQueue.shift();
+      this.set('currentSong', newSong);
+
+    }, this);
+
   }
+
+  // events: {
+  //   'ended #player' : function(e){
+  //     console.log('event handler ended')
+  //   } 
+  // }
 
 });
